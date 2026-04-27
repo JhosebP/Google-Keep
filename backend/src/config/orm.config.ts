@@ -4,7 +4,6 @@ import { Note } from "src/note/model/note.model";
 import { Noteshare } from "src/noteshare/model/noteshare.model";
 import { Usuario } from "src/usuario/model/usuario.model";
 import { Attachment } from "src/attachment/model/attachment.model";
-
 export default registerAs(
     'orm.config',
     (): TypeOrmModuleOptions => ({
@@ -14,7 +13,7 @@ export default registerAs(
         username: 'sa',
         password: '1844',
         database: 'googlekeep-db',
-        entities: [Usuario, Noteshare, Note, Attachment],
+        entities: [Usuario, Noteshare, Note, Noteshare, Attachment],
         synchronize: true,
     }),
-); 
+);
