@@ -1,3 +1,6 @@
+# dependencia faltante 
+npm install npm-run-all --save-dev
+
 # Install dependencies
 > npm run install:all
 
@@ -10,4 +13,4 @@ Jhoseb Pablo Cabrera Condori
 dev: Gabriel Zeballos Gutierrez
 dev: Brian Choque
 QA: Triana Belen Hurtado Chicaba
-QA: Jose Suntura 
+QA: Jose Junior Suntura Zambrana 
