@@ -44,10 +44,4 @@ export class UsuarioController {
     // hashedPassword - '$2b$12$KIXQj8q1Z5s9e7uXy3GzOe5v1n9s8f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0'
     return await this.service.verifyPassword(plainPassword, hashedPassword);
   }
-
-  @Post('update/:id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() data: UsuarioDto) {
-    return await this.service.update(id, data); 
-    // Nota: Asegúrate de que el método update(id, data) exista en tu usuario.service.ts
-  }
 }

@@ -10,11 +10,11 @@ export class Noteshare {
     @Column()
     role: number;
 
-    @ManyToOne(() => Note, data => data.id)
+    @ManyToOne(() => Note, data => data.id, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'note_id'})   
     note: Note;
 
-    @ManyToOne(() => Usuario, data => data.id)
+    @ManyToOne(() => Usuario, data => data.id, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'usuario_id'})
     usuario: Usuario;
 

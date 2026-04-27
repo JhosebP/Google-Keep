@@ -1,0 +1,19 @@
+<p-dialog [(visible)]="visible" styleClass="w-[500px]" header="Detalles de la Nota" [modal]="true" class="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="field">
+            <label for="title">Título</label>
+            <input type="text" pInputText id="title" [(ngModel)]="entity().title" required autofocus />
+            <small class="p-error" *ngIf="!entity().title">El título es requerido.</small>
+        </div>
+        <div class="field mt-3">
+            <label for="content">Contenido</label>
+            <textarea pTextarea id="content" [(ngModel)]="entity().content" rows="6" required></textarea>
+            <small class="p-error" *ngIf="!entity().content">El contenido es requerido.</small>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="footer">
+        <p-button label="Cancelar" icon="pi pi-times" [text]="true" (onClick)="closeDialog()" />
+        <p-button label="Guardar" icon="pi pi-check" [text]="true" (onClick)="saveMethod()" [disabled]="!entity().title || !entity().content" />
+    </ng-template>
+</p-dialog>

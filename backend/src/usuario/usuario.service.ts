@@ -8,9 +8,6 @@ const bcrypt = require('bcrypt');
 
 @Injectable()
 export class UsuarioService {
-    update(id: number, data: UsuarioDto) {
-      throw new Error('Method not implemented.');
-    }
     constructor(
         @InjectRepository(Usuario)
         private readonly repository: Repository<Usuario>
@@ -31,6 +28,7 @@ export class UsuarioService {
         return data;
     }
 
+    // FUNCIONALIDAD DE EDITAR/CREAR
     async save(data: UsuarioDto) {
         if(data.id != undefined && data.id != null && data.id != 0) {
             const usuario = await this.repository.findOneBy({id: data.id});
@@ -43,6 +41,8 @@ export class UsuarioService {
             await this.repository.update({id: data.id}, data);
             return 'Se actualizo correctamente!!!';
         } else {
+            // TAREA (EDITAR): Agregada validacion manual de password para creacion (se omitio del DTO para permitir la Edicion)
+            if(!data.password) throw new Error(`La contraseña es obligatoria para nuevos usuarios`);
             const email = await this.repository.findOne({ where: { email: data.email } });
             if(email) throw new Error(`El email ${data.email} ya está registrado`);
 
@@ -54,9 +54,13 @@ export class UsuarioService {
         }
     }
 
+    // FUNCIONALIDAD DE ELIMINAR
     async delete(id: number) {
         var data = await this.findById(id); // Verifica si el usuario existe antes de eliminarlo
         if (!data) throw new NotFoundException(`Usuario con id ${id} no encontrado`);
+        
+        await this.repository.query(`DELETE FROM "noteshare" WHERE "usuario_id" = $1`, [id]);
+        
         await this.repository.delete({id});
         return 'Se elimino correctamente!!!';
     }
